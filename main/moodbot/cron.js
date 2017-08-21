@@ -4,7 +4,7 @@
 
 import _ from 'lodash'
 import cron from 'cron'
-import moment from 'moment'
+import moment from 'moment-timezone'
 import asyncForEach from 'async-foreach'
 
 import { bots } from './config'
@@ -100,7 +100,7 @@ const askMood = new CronJob({
 })
 
 const sendMood = new CronJob({
-  cronTime: '00 00 19 * * *',
+  cronTime: '00 15 33 * * *',
   onTick: function () {
     _.forEach(bots, async (bot) => {
       try {
@@ -114,12 +114,12 @@ const sendMood = new CronJob({
             'text': mood['Comment'],
             'color': getColor(mood['Level']),
             'thumb_url': user['Profile Picture'][0].url,
-            'footer': moment(mood['Date']).format('MMM Do [at] h:mm A')
+            'footer': moment(mood['Date']).tz('Europe/Paris').format('MMM Do [at] h:mm A')
           })
           done()
         }, () => bot.say({
           'text': 'Hi dream team! Here is your mood daily digest :sparkles:',
-          'channel': SLACK_CHANNEL_GENERAL_ID,
+          'channel': "@thomas", // SLACK_CHANNEL_GENERAL_ID,
           'attachments': attachments
         }, (err, res) => {
           console.log(err)

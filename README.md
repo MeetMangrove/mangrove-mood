@@ -1,4 +1,10 @@
-# Mangrove Mood
+# Mangrove Mood (deprecated)
+
+*This repository is no longer maintain anymore, see [Familybot](https://github.com/MeetMangrove/familybot)*
+
+
+<---------->
+
 
 A mood bot to display each day the mood's team.
 
